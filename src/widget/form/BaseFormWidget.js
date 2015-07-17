@@ -82,31 +82,15 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             }
             this.handleDom(widgetDom);
 
-            /*
-
-             var compTemp = formTpl;
-             if ("inline" == $this.options.parentTpl) {
-             compTemp = inlineTpl;  //待扩展，设置为表格的模板 gridTpl
-             }
-             //替换模板中的子模板名称
-             //            compTemp = compTemp.replace(/\{\{TEMPLATENAME\}\}/g, widgetType+"_temp_"+$this.options.uuid);
-             //替换模板中的子模板内容
-             compTemp = compTemp.replace(/\{\{TEMPLATEVALUE\}\}/g, tmp);
-             //compTemp = tmp;
-             */
-
-
-            var e = jQuery("<div></div>").addClass("page_" + $this.getAttr('$xtype')).attr("ms-important", $this.getId());
-            //e.append(compTemp);
-
-            var parentDom = widgetDom.parent();
-            e.append(widgetDom);
-            parentDom.append(e);
+            widgetDom.wrap("<div></div>");
+            var e = widgetDom.parent();
+            e.addClass("page_" + $this.getAttr('$xtype')).attr("ms-important", $this.getId());
 
             $this.$element = e;
             $this.element = e[0];
 
-            if ("inline" == $this.options.parentTpl && (this.getAttr("showMessage") || this.getAttr("showErrorMessage"))) {
+            if ("inline" == $this.options
+                .parentTpl && (this.getAttr("showMessage") || this.getAttr("showErrorMessage"))) {
                 var msgs = "";
                 if (this.getAttr("showMessage")) {
                     msgs += this.getAttr("message");
@@ -128,14 +112,7 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             }
 
 
-            //avalon.nextTick(function(){
-            //setTimeout(function(){
-            //avalon.scan($this.getParentElement()[0], $this.vmodel);
             avalon.scan($this.element);
-
-            //var e = $('<div class="page_combobox" avalonctrl="sex1"><div><table class="form-horizontal-table"><tbody><tr><td class="form-label col-md-4 col-xs-4 col-sm-4 col-lg-4">        <span class="ampS-required-asterisk" style="display: none;">        *</span>        <label class="control-label">学院（多选）</label>        </td>        <td class="col-xs-7 col-sm-7 col-md-7 col-lg-7" style="padding: 0px;">            <!--调用组件模板-->        <div class="form-group" style=" margin-bottom: 0px;" name="ComboBoxWidget_sex1">        <div class="input-group chosen-container chosen-with-drop chosen-container-multi" style="width: 100%;">            <!--多选区域-->        <div style="border: 1px solid #CBD5DD;  border-radius: 2px;min-height: 34px;" title="">        <ul class="chosen-choices" style="border: 0px;">            <!--repeat481977894902--><li class="search-choice">        <span>计算机学院</span>        <a class="search-choice-close" data-option-array-index="105"></a>        </li><!--repeat481977894902--><li class="search-choice">        <span>经管学院</span>        <a class="search-choice-close" data-option-array-index="105"></a>        </li><!--repeat481977894902--><!--repeat481977894902:end-->        <li class="search-field">        <input type="text" autocomplete="off" tabindex="4" style="width: 25px;">        </li>        </ul>        </div>            <!--单选可搜索-->            <!--ms-if-->            <!--单选不可搜索-->            <!--ms-if-->            <!--下拉面板区域-->            <!--ms-if-->        </div>        </div>            <!--ms-if-->        </td>        <td class="form-icon-container  col-xs-1 col-sm-1 col-md-1 col-lg-1">        <span class="glyphicon" style="display: none;"></span>        </td>        </tr>        <tr class="form-horizontal-message">        <td></td>        <td class="text-muted" colspan="2" style="padding: 0px;">        <span>  </span>        <span></span>        </td>        </tr>        </tbody></table>        </div></div>');
-            //var e = $('<div class="page_input" avalonctrl="username"><div>            <table class="form-horizontal-table">            <tbody><tr>            <td class="form-label col-md-2 col-xs-2 col-sm-2 col-lg-2">            <span class="ampS-required-asterisk" style="display: none;">            *            </span>            <label class="control-label">您的姓名</label>            </td>            <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding: 0px;">                <!--调用组件模板-->            <input class="form-control form-widget-to-focus-class form-text" readonly="true">            </td>            <td class="form-icon-container  col-xs-1 col-sm-1 col-md-1 col-lg-1">            <span class="glyphicon glyphicon-ok" style="display: none;"></span>            </td>            </tr>            <tr class="form-horizontal-message">            <td></td>            <td class="text-muted" colspan="2" style="padding: 0px;">            <span> 请输入2-5个汉字 </span>            <span></span>            </td>            </tr>            </tbody></table>            </div></div>');
-            //parentDOM.append(e);
 
             $this.fireEvent("afterRender", [$this.vmodel]);
             if ($this["_afterRender"]) {
@@ -159,8 +136,6 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                     $this.dataBind = dbinder;
                 }
             }
-            //}, 0);
-
 
 
             return this;

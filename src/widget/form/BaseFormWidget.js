@@ -9,52 +9,46 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             $xtype: xtype,
             status: 'edit',//default = edit |edit|readonly|disabled
 
-            parentTpl: "form",  //组件的父模板类型 default=form |form|inline
+            $parentTpl: "form",  //组件的父模板类型 default=form |form|inline
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            initValue: '',// 初始值
-            initDisplay: '',
+            $initValue: '',// 初始值
+            $initDisplay: '',
 
             value: '', // 具体值
             display: '',//显示值
 
-            valueChanged: false, //初始值发生了变化
+            $valueChanged: false, //初始值发生了变化
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            label: '未设置标题', //标题
-            showLabel: true,
+            $label: '未设置标题', //标题
+            $showLabel: true,
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            hasMessageBar: {
-                get: function() {
-                    return this.showMessage || this.showErrorMessage;
-                }
-            },
+            $message: '',
+            $showMessage: true,
 
-            message: '',
-            showMessage: true,
+            $errorMessage: '',
+            $showErrorMessage: false,
+            $tipPosition:"bottom",
 
-            errorMessage: '',
-            showErrorMessage: false,
-            tipPosition:"bottom",
+            $glyphicon: '',//eg:$glyphicon-ok
+            $showGlyphicon: false,
 
-            glyphicon: '',//eg:glyphicon-ok
-            showGlyphicon: false,
+            $required: false,
+            $showRequired: true,
 
-            required: false,
-            showRequired: true,
-
-            validationRules: {},
+            $validationRules: {},
 
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            labelSpan: 4,
+            $labelSpan: 4,
             $rowNum: 1,
             $colNum: 1,
-            height: null,
-            controlPadding: '0',
+            $height: null,
+            $controlPadding: '0',
 
             //data binding
-            bind: '',
+            $bind: '',
 
-            parentLayoutWidgetId:''//在表单布局的时候使用
+            $parentLayoutWidgetId:''//在表单布局的时候使用
 
         },
         initialize: function (opts) {
@@ -62,10 +56,10 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                 opts['display'] = opts['value'];
             }
             if (opts['value'] != undefined) {
-                opts['initValue'] = opts['value'];
+                opts['$initValue'] = opts['value'];
             }
             if (opts['display'] != undefined) {
-                opts['initDisplay'] = opts['display'];
+                opts['$initDisplay'] = opts['display'];
             }
             this.parent(opts);
         },
@@ -85,25 +79,26 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             widgetDom.wrap("<div></div>");
             var e = widgetDom.parent();
             e.addClass("page_" + $this.getAttr('$xtype')).attr("ms-important", $this.getId());
+            //e.append('<input ms-if="status==\'readonly\'" class="form-control form-widget-to-focus-class form-text" ms-duplex="display"  readonly/>');
 
             $this.$element = e;
             $this.element = e[0];
 
             if ("inline" == $this.options
-                .parentTpl && (this.getAttr("showMessage") || this.getAttr("showErrorMessage"))) {
+                .$parentTpl && (this.getAttr("$showMessage") || this.getAttr("$showErrorMessage"))) {
                 var msgs = "";
-                if (this.getAttr("showMessage")) {
-                    msgs += this.getAttr("message");
+                if (this.getAttr("$showMessage")) {
+                    msgs += this.getAttr("$message");
                 }
-                if (this.getAttr("showErrorMessage") && this.getAttr("errorMessage")) {
-                    msgs += this.getAttr("errorMessage") + " ";
+                if (this.getAttr("$showErrorMessage") && this.getAttr("$errorMessage")) {
+                    msgs += this.getAttr("$errorMessage") + " ";
                 }
                 if (msgs) {
                     this.toolTip = Page.create("tooltip", {
                         content: msgs,
                         target: this.options.$parentId,
                         parentDom:this.getParentElement()||this.getElement(),
-                        position: this.options.tipPosition,
+                        position: this.options.$tipPosition,
                         autoHide: false
                     });
                     this.toolTip.render();
@@ -118,12 +113,12 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             if ($this["_afterRender"]) {
                 $this["_afterRender"]($this.vmodel);
             }
-            if ($this.options.bind != '') {
-                var bindField = $this.options.bind;
+            if ($this.options.$bind != '') {
+                var bindField = $this.options.$bind;
                 if (bindField) {
                     var f = bindField.split(".");
                     if (f.length != 2) {
-                        throw new Error('bind error' + bindField);
+                        throw new Error('$bind error' + bindField);
                     }
                     var dsId = f[0];
                     var dsField = f[1];
@@ -151,7 +146,7 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             if (typeOf(value) == 'string' || typeOf(value) == 'number') {
                 this.setAttr("value", value, notFireFormValueChangeEvent);
                 this.setAttr("display", value);
-                this.setAttr("valueChanged", true);
+                this.setAttr("$valueChanged", true);
             } else if (typeOf(value) == 'object') {
                 if (value['value'] != undefined) {
                     this.setAttr("value", value['value'], notFireFormValueChangeEvent);
@@ -161,17 +156,17 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                         this.setAttr("display", value['value']);
                     }
                 }
-                this.setAttr("valueChanged", true);
+                this.setAttr("$valueChanged", true);
             } else {
                 window.console.log('set value error,unknown structure ...' + value);
             }
 
         },
         getInitValue: function () {
-            return this.getAttr("initValue");
+            return this.getAttr("$initValue");
         },
         getInitDisplay: function () {
-            return this.getAttr("initDisplay");
+            return this.getAttr("$initDisplay");
         },
         reset: function () {
             var that = this;
@@ -186,23 +181,23 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             if (status == 'edit') {
                 this.setAttrs({
                     status: status,
-                    showErrorMessage: false,
-                    showMessage: true,
-                    showRequired: that.getAttr("required")
+                    $showErrorMessage: false,
+                    $showMessage: true,
+                    $showRequired: that.getAttr("$required")
                 });
             } else if (status == 'readonly') {
                 this.setAttrs({
                     status: status,
-                    showErrorMessage: false,
-                    showMessage: false,
-                    showRequired: false
+                    $showErrorMessage: false,
+                    $showMessage: false,
+                    $showRequired: false
                 });
             } else if (status == 'disabled') {
                 this.setAttrs({
                     status: status,
-                    showErrorMessage: false,
-                    showMessage: false,
-                    showRequired: that.getAttr("required")
+                    $showErrorMessage: false,
+                    $showMessage: false,
+                    $showRequired: that.getAttr("$required")
                 });
             }else if (status == 'ready2edit') {
 
@@ -219,48 +214,48 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             window.console.error("need to be extended.");
         },
         validate: function () {
-            //var valRes = Page.validation.validateValue(this.getValue(),this.getAttr("validationRules"));
+            //var valRes = Page.validation.validateValue(this.getValue(),this.getAttr("$validationRules"));
             var validateTool = Page.create("validation", {onlyError: true});//后续由系统统一创建，只需调用即可
 
             var valRes = null;
-            if (this.getAttr("required")) {//先判断是否必填
+            if (this.getAttr("$required")) {//先判断是否必填
                 valRes = validateTool.checkRequired(this.getValue());
             }
-            if ((!valRes || valRes.result) && this.getAttr("validationRules")) {//再判断校验规则
-                valRes = validateTool.validateValue(this.getValue(), this.getAttr("validationRules"));
+            if ((!valRes || valRes.result) && this.getAttr("$validationRules")) {//再判断校验规则
+                valRes = validateTool.validateValue(this.getValue(), this.getAttr("$validationRules"));
             }
             if (valRes && !valRes.result) {//将错误信息赋值给属性
-                this.setAttr("errorMessage", valRes.errorMsg);
-                this.setAttr("showErrorMessage", true);
+                this.setAttr("$errorMessage", valRes.errorMsg);
+                this.setAttr("$showErrorMessage", true);
             } else {//清空错误信息
-                this.setAttr("errorMessage", "");
-                this.setAttr("showErrorMessage", false);
+                this.setAttr("$errorMessage", "");
+                this.setAttr("$showErrorMessage", false);
             }
         },
         isValid: function (notShowMessage) {
             var validateTool = Page.create("validation", {onlyError: true});//后续由系统统一创建，只需调用即可
 
             var valRes = null;
-            if (this.getAttr("required")) {//先判断是否必填
+            if (this.getAttr("$required")) {//先判断是否必填
                 valRes = validateTool.checkRequired(this.getValue());
             }
-            if ((!valRes || valRes.result) && this.getAttr("validationRules")) {//再判断校验规则
-                valRes = validateTool.validateValue(this.getValue(), this.getAttr("validationRules"));
+            if ((!valRes || valRes.result) && this.getAttr("$validationRules")) {//再判断校验规则
+                valRes = validateTool.validateValue(this.getValue(), this.getAttr("$validationRules"));
             }
             if (valRes && !valRes.result) {//将错误信息赋值给属性
                 if (notShowMessage) {
 
                 } else {
-                    this.setAttr("errorMessage", valRes.errorMsg);
-                    this.setAttr("showErrorMessage", true);
+                    this.setAttr("$errorMessage", valRes.errorMsg);
+                    this.setAttr("$showErrorMessage", true);
                 }
                 return false;
             } else {//清空错误信息
                 if (notShowMessage) {
 
                 } else {
-                    this.setAttr("errorMessage", "");
-                    this.setAttr("showErrorMessage", false);
+                    this.setAttr("$errorMessage", "");
+                    this.setAttr("$showErrorMessage", false);
                 }
                 return true;
             }
@@ -284,17 +279,17 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
         _errorMessageChange: function () {
             var msgs = "";
 
-            if (this.getAttr("showErrorMessage") && this.getAttr("errorMessage")) {
-                msgs = this.getAttr("errorMessage");
-            }else if(this.getAttr("showMessage")) {
-                msgs = this.getAttr("message");
+            if (this.getAttr("$showErrorMessage") && this.getAttr("$errorMessage")) {
+                msgs = this.getAttr("$errorMessage");
+            }else if(this.getAttr("$showMessage")) {
+                msgs = this.getAttr("$message");
             }
             if (msgs === "") {
                 if (this.toolTip) {
                     this.toolTip.destroy();
                     this.toolTip = null;
                 }
-            } else if ("inline" == this.options.parentTpl && (this.getAttr("showMessage") || this.getAttr("showErrorMessage"))) {
+            } else if ("inline" == this.options.$parentTpl && (this.getAttr("$showMessage") || this.getAttr("$showErrorMessage"))) {
                 if(this.toolTip) {
                     this.toolTip.setAttr("content", msgs||"");
                 }else{
@@ -302,7 +297,7 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                         content: msgs,
                         target: this.options.$parentId,
                         parentDom:this.getElement(),
-                        position:this.options.tipPosition,
+                        position:this.options.$tipPosition,
                         autoHide: false
                     });
                     this.toolTip.render();

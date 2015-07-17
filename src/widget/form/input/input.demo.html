@@ -74,7 +74,7 @@
 </script>
 <!--<script src="/page/bower_components/avalon/avalon.js" data-main="/page/dist/page-build"></script>-->
 <script src="/page/bower_components/avalon/avalon.js" ></script>
-<script src="/page/dist/page-build.js"></script>
+<!--<script src="/page/dist/page-build.js"></script>-->
 
 <script>
     function valForm(){
@@ -83,17 +83,17 @@
         //获取数据
         var comps = Page.manager.components;
         var formValues = {};
-        formValues.username = comps.username.getValue();
+        formValues.begintime = comps.begintime.getValue();
         formValues.phone = comps.phone.getValue();
 
         //获取校验规则
         var formRules = {};
-        formRules.username =  comps.username.getAttr("validationRules");
+        formRules.begintime =  comps.begintime.getAttr("validationRules");
         formRules.phone =  comps.phone.getAttr("validationRules");
         formRules._global = [//_global 为固定
             {
                 "ruleId": "notEqualField",
-                "field1": "username",
+                "field1": "begintime",
                 "field2": "phone"
             }
 //            ,
@@ -111,10 +111,8 @@
             alert("校验结果："+JSON.stringify(valRes.errorMsg));
         }
     }
-//    require(["../../../page/src/Bootstrap"], function () {
+    require(["../../../page2/src/Bootstrap"], function () {
 for(var i=0; i<1;i++) {
-
-
         var inq = Page.create("input", {
             $parentId: '2',
             value: '',
@@ -161,7 +159,7 @@ for(var i=0; i<1;i++) {
     time.render();
 }
         //console.log(inq);
-//    });
+    });
 </script>
 <!--<script src="bower_components/avalon/avalon.js" ></script>-->
 <!--<script src="dist/page-build.js" data-main="demo.js"></script>-->

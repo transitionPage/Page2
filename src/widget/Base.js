@@ -16,14 +16,14 @@ define([], function () {
         Implements: [Events, Options],
         options: {
             $id: "",
-            vid: "",
-            uuid: "",
+            $vid: "",
+            $uuid: "",
             $xtype: xtype,
             $fullName: fullName,
             $parentId: null,
             $appendEl: null,
             show: true,
-            _addWrapDiv: true//是否在组件外边套DIV（ms－controller）
+            $addWrapDiv: true//是否在组件外边套DIV（ms－controller）
         },
         mix$: function (opts) {
             var result = {};
@@ -46,11 +46,11 @@ define([], function () {
             if (!this.options || this.options.$id == "") {
                 this.options.$id = this.options.$xtype + String.uniqueID();
             }
-            if (this.options.vid == '') {
-                this.options.vid = this.options.$id;
+            if (this.options.$vid == '') {
+                this.options.$vid = this.options.$id;
             }
-            if (this.options.uuid == '') {
-                this.options.uuid = String.uniqueID();
+            if (this.options.$uuid == '') {
+                this.options.$uuid = String.uniqueID();
             }
             var that = this;
             this.vmodel = avalon.define(this.options);
@@ -130,7 +130,7 @@ define([], function () {
             var tmp = this.getTemplate();
 
             var e = jQuery("<div></div>");
-            if (!this.options._addWrapDiv) {
+            if (!this.options.$addWrapDiv) {
                 e = jQuery(tmp);
             } else {
                 e.append(tmp);

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/page/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/page/src/css/page.css" rel="stylesheet">
+
+    <style type="text/css">
+        body{
+            margin:0px;
+            padding:0px;
+        }
+        #glideDiv0{position:fixed; bottom:0;left:0; width:100%; background:#F00;}
+    </style>
+</head>
+<body ms-skip>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Horizontal form</h5>
+
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">Config option 1</a>
+                        </li>
+                        <li><a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6" id="multi">
+
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content" >
+                <div class="row">
+                    <div class="col-md-6" id="singleSearchable">
+
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content" >
+                <div class="row">
+                    <div class="col-md-6" id="single">
+
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content" >
+                <div class="row">
+                    <div class="col-md-6" id="single">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="/page/bower_components/mootools/Source/Core/Core.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Array.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/String.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Object.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Number.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Function.js"></script>
+<script src="/page/bower_components/mootools/Source/Class/Class.js"></script>
+<script src="/page/bower_components/mootools/Source/Class/Class.Extras.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
+
+<script src="/page/bower_components/avalon/avalon.js"></script>
+<script src="/page/dist/page-build.js"></script>
+<script>
+//    require(["../../src/Bootstrap"], function () {
+
+        var ds = Page.create("dataSet", {
+            $id: 'comboBoxDS',
+            fetchUrl: 'Data.demo.json'
+//            data: [
+//                {value:"1", display: "计算机学院qqqq"}
+//            ]
+        });
+
+        var combo1 = Page.create('combobox', {
+            $parentId: 'multi',
+            $id: 'sex1',
+            label: '学院（多选）',
+            multi: true,
+            value: "1,3",
+            display: "计算机学院,经管学院",
+            $pageSize: 5,
+            dataSetId: "comboBoxDS",
+//            url: "Data.demo.json",
+            showErrorMessage:true,
+            validationRules: {
+                required:true,//options中为false时，此处可重开启校验
+                length: {
+                    maxLen: 4,
+                    minLen: 2,
+                    customErrMsg:"请选择2-4个学院"
+                }
+            },
+            beforeSelectEvent: function(value, display, obj, el) {
+//                alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择前事件："+value + " " +  display);
+            }
+//            selectedEvent: function(value, display, obj, el) {
+//                alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择后事件："+value + " " +  display);
+//            }
+        })
+        combo1.render();
+
+        combo1._getCompVM().selectedEvent= function(value, display, obj, el) {
+//            alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择后事件："+value + " " +  display);
+        }
+        var combo2 = Page.create('combobox', {
+            $parentId: 'singleSearchable',
+            $id: 'sex2',
+            label: '学院（单选可搜索）',
+            multi: false,
+            searchable: true,
+//            status: "readonly",
+            searchKey: "aaa",
+//            showClear: false,
+//            panelCancel: false,
+            showDropIcon: false,
+            url: "Data1.demo.json",
+            valueField: "id",
+            textField: "name",
+            value: "1",
+            display: "计算机学院"
+
+        })
+        combo2.render();
+for(var i=0; i<40; i++) {
+
+
+        var combo3 = Page.create('combobox', {
+            $parentId: 'single',
+//            $id: 'sex3',
+            label: '学院（单选）',
+            multi: false,
+//            parentTpl: "inline",
+            searchable: false,
+//            value: "1",
+//            display: "计算机学院",
+            $pageSize: 5,
+            dataSetId: "comboBoxDS",
+            beforeOpenEvent: function(a,b,c,d) {
+//                alert("让你打不开下拉面板，哈哈");
+//                return false;
+            }
+        })
+        combo3.render();
+}
+        var combo4 = Page.create('combobox', {
+            $parentId: 'single',
+            $id: 'sex4',
+            label: '下拉树',
+            multi: true,
+//            searchable: false,
+            value: "102",
+            display: "最简单的树 --  简单 JSON 数据",
+            model: "tree",
+            mainAlias: "treeData",  //数据源主实体别名
+            url: "treeData.demo.json",
+            valueField: "id",
+            textField: "name",
+//            panelCancel: false,
+//            value: "1",
+//            display: "计算机学院",
+            beforeOpenEvent: function(a,b,c,d) {
+//                alert("让你打不开下拉面板，哈哈");
+//                return false;
+            }
+        })
+        combo4.render();
+avalon.scan($(".container")[0]);
+//        Page.manager.components.sex1.focus()
+//    });
+</script>
+<!--<script src="bower_components/avalon/avalon.js" ></script>-->
+<!--<script src="dist/page-build.js" data-main="demo.js"></script>-->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="/page/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/page/src/css/page.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/plugins/iCheck/green.png" rel="stylesheet">
+    <link href="/page/lib/bootstrap/css/plugins/iCheck/green@2x.png" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <link href="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+</head>
+<body>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    我只是一个div：<br/>
+                    <div class="col-md-12" id="gridContainer">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="simContainer">
+                        我是已经存在的table<br/>
+                        <table class="table table-striped table-bordered table-hover " id="alreadytable">
+                            <thead>
+                            <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>Trident</td>
+                                <td>Internet
+                                    Explorer 4.0
+                                </td>
+                                <td>Win 95+</td>
+                                <td class="center">4</td>
+                                <td class="center">X</td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>AA</td>
+                                <td>BB</td>
+                                <td>CC</td>
+                                <td class="center">4</td>
+                                <td class="center">X</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/page/bower_components/mootools/Source/Core/Core.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Array.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/String.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Object.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Number.js"></script>
+<script src="/page/bower_components/mootools/Source/Types/Function.js"></script>
+<script src="/page/bower_components/mootools/Source/Class/Class.js"></script>
+<script src="/page/bower_components/mootools/Source/Class/Class.Extras.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
+
+<!-- Data Tables -->
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/dataTables/dataTables.responsive.js"></script>
+<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+<script src="/page/src/widget/dataTable/dataTable.chineseLan.js"></script>
+<!-- Data Tables End -->
+
+<script src="/page/bower_components/avalon/avalon.js"></script>
+<script>
+    require(["../../../page/src/Bootstrap"], function () {
+
+        var eDataTableAuto = Page.create('eDataTable', {
+            $parentId: 'gridContainer',
+            $id: "ss1",
+            autoTable:true,
+            columns: [
+                { title: 'First Name', data: 'FirstName', width: 100 },
+                { title: 'Last Name', data: 'LastName', width: 100 },
+                { title: 'Product', data: 'Product', width: 180 },
+                { title: 'Unit Price', data: 'Price', width: 90, align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
+                { title: 'Quantity', data: 'Quantity', width: 80, align: 'right', cellsAlign: 'right' }
+            ],
+            data:[
+                {"FirstName":"A1","LastName":"A2","Product":"A3","Price":"A4",Quantity:"A5"},
+                {"FirstName":"B1","LastName":"B2","Product":"B3","Price":"B4",Quantity:"B5"},
+                {"FirstName":"C1","LastName":"C2","Product":"C3","Price":"C4",Quantity:"C5"}
+            ]
+        });
+        eDataTableAuto.render();
+        //eDataTableAuto.dataTableObj.fnAddData({});//点用dataTable对象即可
+
+        var eDataTable = Page.create('eDataTable', {
+            $parentId: 'alreadytable',
+            $id: "ss2",
+            autoTable:false
+        });
+        eDataTable.render();
+        //eDataTableAuto.dataTableObj.fnAddData({});//点用dataTable对象即可
+    });
+</script>
+<!--<script src="bower_components/avalon/avalon.js" ></script>-->
+<!--<script src="dist/page-build.js" data-main="demo.js"></script>-->
+</body>
+</html>

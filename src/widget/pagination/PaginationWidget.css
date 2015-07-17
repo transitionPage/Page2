@@ -1,0 +1,14 @@
+.emap_pagination_noDataTip{
+    text-align:left;
+}
+.emap_pagination_pageIndexInput{
+    width:25px;
+    height:25px;
+    text-align:center;
+    border-color: #DDDDDD;
+    color: inherit;
+    border: 1px solid #DDDDDD;
+}
+.emap_pagination_pageNoLink{
+    display:initial;
+}

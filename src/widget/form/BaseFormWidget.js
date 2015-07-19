@@ -74,12 +74,12 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
             if (!widgetDom) {
                 widgetDom = $this.getParentElement();
             }
-            this.handleDom(widgetDom);
 
             widgetDom.wrap("<div></div>");
             var e = widgetDom.parent();
             e.addClass("page_" + $this.getAttr('$xtype')).attr("ms-important", $this.getId());
-            //e.append('<input ms-if="status==\'readonly\'" class="form-control form-widget-to-focus-class form-text" ms-duplex="display"  readonly/>');
+
+            this.handleDom(widgetDom);
 
             $this.$element = e;
             $this.element = e[0];

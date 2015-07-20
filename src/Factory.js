@@ -47,9 +47,9 @@ define([
     "./widget/form/textarea/TextareaWidget",
     //"./widget/form/slider/SliderWidget",
     //"./widget/form/richeditor/RicheditorWidget",
-    "./widget/dialog/DialogWidget"
+    "./widget/dialog/DialogWidget",
     //"./widget/customSearcher/CustomSearcherWidget",
-    //"./widget/form/tooltip/TooltipWidget",
+    "./widget/form/tooltip/TooltipWidget"
     //
     //"./widget/progress/ProgressWidget",
     //"./widget/tree/TreeWidget"

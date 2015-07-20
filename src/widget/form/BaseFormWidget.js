@@ -95,11 +95,13 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                 }
                 if (msgs) {
                     this.toolTip = Page.create("tooltip", {
+                        $target: this.options.$parentId,
+                        $parentDom:this.getParentElement()||this.getElement(),
                         content: msgs,
-                        target: this.options.$parentId,
-                        parentDom:this.getParentElement()||this.getElement(),
-                        position: this.options.$tipPosition,
-                        autoHide: false
+                        $opts:{
+                            position: this.options.$tipPosition,
+                            autoHide: false
+                        }
                     });
                     this.toolTip.render();
                     this.toolTip.show();
@@ -294,11 +296,13 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                     this.toolTip.setAttr("content", msgs||"");
                 }else{
                     this.toolTip = Page.create("tooltip", {
+                        $target: this.options.$parentId,
+                        $parentDom:this.getElement(),
                         content: msgs,
-                        target: this.options.$parentId,
-                        parentDom:this.getElement(),
-                        position:this.options.$tipPosition,
-                        autoHide: false
+                        $opts:{
+                            position:this.options.$tipPosition,
+                            autoHide: false
+                        }
                     });
                     this.toolTip.render();
                     this.toolTip.show();

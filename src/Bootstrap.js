@@ -1,10 +1,10 @@
 require.config({
     paths: {
-        art: '../../../../page/lib/artdialog/artDialog.source',
-        artIframe: '../../../../page/lib/artdialog/iframeTools.source',
-        my97DatePicker: "../../../../../../page/lib/My97DatePicker/WdatePicker",
-        zTree: "../../../../../../page/lib/zTree_v3/js/jquery.ztree.all-3.5",
-        kindeditor: "../../../../../../page/lib/kindeditor-4.1.10/kindeditor"
+        art: '../../../../Page2/lib/artdialog/artDialog.source',
+        artIframe: '../../../../Page2/lib/artdialog/iframeTools.source',
+        my97DatePicker: "../../../../../../Page2/lib/My97DatePicker/WdatePicker",
+        zTree: "../../../../../../Page2/lib/zTree_v3/js/jquery.ztree.all-3.5",
+        kindeditor: "../../../../../../Page2/lib/kindeditor-4.1.10/kindeditor"
     },
     shim: {
         art: {

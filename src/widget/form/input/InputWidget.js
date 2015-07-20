@@ -35,7 +35,7 @@ define(['../BaseFormWidget', 'text!./InputWidget.html', 'css!./InputWidget.css']
         },
         handleDom: function(widgetDom) {
             if(widgetDom) {
-                widgetDom.attr("ms-css-height", "height").attr("ms-duplex", "value").attr("ms-duplex", "value").attr("ms-attr-placeholder", "$placeholder")
+                widgetDom.attr("ms-css-height", "$height").attr("ms-duplex", "value").attr("ms-attr-placeholder", "$placeholder")
                     .attr("ms-attr-readonly", "status=='readonly'").attr("ms-attr-disabled", "status=='disabled'").attr("ms-class", "form-text:status=='readonly'");
             }
         }

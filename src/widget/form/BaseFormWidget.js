@@ -66,7 +66,7 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
         render: function (widgetDom) {
             this.fireEvent("beforeRender", [this.vmodel]);
             var $this = this;
-            var tmp = this.getTemplate();
+            //var tmp = this.getTemplate();
 
             var widgetType = $this.options.$xtype;
 

@@ -1,5 +1,5 @@
-define(['../BaseFormWidget','../../../../lib/kendoui/js/kendo.tooltip', 'css!../slider/SliderWidget.css','css!./TooltipWidget.css'], function (BaseFormWidget,slider) {
-    var xtype = "tooltip";//
+define(['../BaseFormWidget','css!../slider/SliderWidget.css','css!./TooltipWidget.css'], function (BaseFormWidget) {
+    var xtype = "tooltip";
     var TooltipWidget = new Class({
         Extends: BaseFormWidget,
         options: {

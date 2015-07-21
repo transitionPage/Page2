@@ -1,33 +1,29 @@
-define(['../BaseFormWidget','../../../../lib/kendoui/js/kendo.maskedtextbox', 'text!./MaskedtextboxWidget.html'], function (BaseFormWidget,maskedtextbox,template) {
+define(['../BaseFormWidget'], function (BaseFormWidget) {
     var xtype = "maskedtextbox";
     var MaskedtextboxWidget = new Class({
         Extends: BaseFormWidget,
         options: {
             $xtype: xtype,
-            promptChar: "_",
-            clearPromptChar:false,
-            rules: {},
-            value: "",
-            mask: "",
-            labelClick: function (vid) {
-                var cmp = Page.manager.components[vid];
-                cmp.fireEvent('labelClick', cmp);
-            },
-            change:function(){
-                var vid = this.options.vid;
-                var cmp = Page.manager.components[vid];
-                cmp._valueChange(this.value());
+            $opts:{
+                promptChar: "_",
+                clearPromptChar:false,
+                rules: {},
+                value: "",
+                mask: "",
+                change:function(){
+                    var vid = this.options.$vid;
+                    var cmp = Page.manager.components[vid];
+                    cmp._valueChange(this.value());
+                }
             }
         },
         maskedObj:null,
         render: function (opts) {
             var p = jQuery.extend({}, this.options, opts || {});
             this.parent(opts);
-            this._getInputElement().kendoMaskedTextBox(p);
-            this.maskedObj = this._getInputElement().data("kendoMaskedTextBox");
-        },
-        getTemplate: function () {
-            return template;
+            p.$opts["$vid"] = this.options.$vid;
+            this.getParentElement().kendoMaskedTextBox(p.$opts);
+            this.maskedObj = this.getParentElement().data("kendoMaskedTextBox");
         },
         getValue:function(){
             var _value = "";
@@ -71,12 +67,10 @@ define(['../BaseFormWidget','../../../../lib/kendoui/js/kendo.maskedtextbox', 't
             }
         },
         _getInputElement: function () {
-            //var input = this.getElement()[0].getElement("input.form-widget-to-focus-class");
-            var input = jQuery(this.getElement()).find("input.form-widget-to-focus-class");
+            var input = jQuery(this.getElement());
             return input;
         },
         focus: function () {
-            //console to invoke this method is not ok...
             var input = this._getInputElement();
             avalon.nextTick(function () {
                 input.focus();
@@ -93,16 +87,22 @@ define(['../BaseFormWidget','../../../../lib/kendoui/js/kendo.maskedtextbox', 't
             var validateTool = Page.create("validation", {onlyError: true});//后续由系统统一创建，只需调用即可
 
             var valRes = null;
-            if (this.getAttr("required")) {//先判断是否必填
+            if (this.getAttr("$required")) {//先判断是否必填
                 valRes = validateTool.checkRequired(this.getValue());
             }
-            if ((!valRes || valRes.result) && this.getAttr("validationRules")) {//再判断校验规则
-                valRes = validateTool.validateValue(this.getValue(), this.getAttr("validationRules"));
+            if ((!valRes || valRes.result) && this.getAttr("$validationRules")) {//再判断校验规则
+                valRes = validateTool.validateValue(this.getValue(), this.getAttr("$validationRules"));
             }
             if (valRes && !valRes.result) {//将错误信息赋值给属性
-                this.setAttr("errorMessage", valRes.errorMsg);
+                this.setAttr("$errorMessage", valRes.errorMsg);
             } else {//清空错误信息
-                this.setAttr("errorMessage", "");
+                this.setAttr("$errorMessage", "");
+            }
+        },
+        handleDom: function(widgetDom) {
+            if(widgetDom) {
+                widgetDom.attr("ms-attr-readonly", "status=='readonly'")
+                    .attr("ms-attr-disabled", "status=='disabled'").attr("ms-class", "form-text:status=='readonly'");
             }
         }
     });

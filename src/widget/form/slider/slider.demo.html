@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link href="/page/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/css/animate.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/css/style.css" rel="stylesheet">
-    <link href="/page/src/css/page.css" rel="stylesheet">
+    <link href="/Page2/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Page2/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/Page2/lib/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/Page2/lib/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/Page2/src/css/page.css" rel="stylesheet">
 
     <!--<link href="../../../../lib/kendoui/styles/kendo.common.min.css" rel="stylesheet">
     <link href="../../../../lib/kendoui/styles/kendo.rtl.min.css" rel="stylesheet">
@@ -45,11 +45,11 @@
             </div>
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-4" id="nameContainer">
-
+                    <div class="col-md-4">
+                        <div id="nameContainer"></div>
                     </div>
-                    <div class="col-md-4" id="widgetContainer">
-
+                    <div class="col-md-4">
+                        <div id="widgetContainer"></div>
                     </div>
                     <input type="button" onclick="setValue();" value="setValue"/>
                     <input type="button" onclick="getValue();" value="getValue"/>
@@ -59,51 +59,61 @@
 
     </div>
 </div>
-<script src="/page/bower_components/mootools/Source/Core/Core.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Array.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/String.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Object.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Number.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Function.js"></script>
-<script src="/page/bower_components/mootools/Source/Class/Class.js"></script>
-<script src="/page/bower_components/mootools/Source/Class/Class.Extras.js"></script>
-<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
-<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Core/Core.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Types/Array.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Types/String.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Types/Object.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Types/Number.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Types/Function.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Class/Class.js"></script>
+<script src="/Page2/bower_components/mootools/Source/Class/Class.Extras.js"></script>
+<script src="/Page2/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
+<script src="/Page2/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
+
+<!--依赖的外部组件kendoui-->
+<script src="/Page2/lib/kendoui/js/kendo.core.js"></script>
+<script src="/Page2/lib/kendoui/js/kendo.userevents.js"></script>
+<script src="/Page2/lib/kendoui/js/kendo.draganddrop.js"></script>
+<script src="/Page2/lib/kendoui/js/kendo.slider.js"></script>
 
 <script>
     $.noConflict();
 </script>
-<script src="/page/bower_components/avalon/avalon.js"></script>
+<script src="/Page2/bower_components/avalon/avalon.js"></script>
 <script>
     var inp,inp1;
     require(["../../src/Bootstrap"], function () {
         inp = Page.create("slider", {
             $parentId: 'nameContainer',
-            value: '',
             $id: 'username',
-            label:"双向slider",
-            multi:true,
-            min: 0,
-            max: 10,
-            smallStep: 1,
-            largeStep: 2,
-            tickPlacement: "both",
-            showButtons: false,
-            status:"disabled"
+            $label:"双向slider",
+            $multi:true,
+            $opts:{
+                min: 0,
+                max: 10,
+                smallStep: 1,
+                largeStep: 4,
+                tickPlacement: "both",
+                showButtons: false,
+                showTick:true
+            }
+//            ,status:"disabled"
         });
         inp.render();
         inp1 = Page.create("slider", {
             $parentId: 'widgetContainer',
-            value: '',
             $id: 'username1',
-            label:"单向slider",
-            min: -20,
-            max: 20,
-            smallStep: 1,
-            largeStep: 20,
-            showButtons: true,
-            /*status:"disabled",*/
-            showTick:false
+            $label:"单向slider",
+            value: 5,
+            $opts:{
+                min: -20,
+                max: 20,
+                smallStep: 1,
+                largeStep: 20,
+                showButtons: true,
+                showTick:true
+            }
+//            ,status:"readonly"
         });
         inp1.render();
 

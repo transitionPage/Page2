@@ -45,7 +45,7 @@ define([
     //"./widget/form/checkbox/CheckboxWidget",
     //"./widget/form/radio/RadioWidget",
     "./widget/form/textarea/TextareaWidget",
-    //"./widget/form/slider/SliderWidget",
+    "./widget/form/slider/SliderWidget",
     "./widget/form/richeditor/RicheditorWidget",
     "./widget/dialog/DialogWidget",
     //"./widget/customSearcher/CustomSearcherWidget",

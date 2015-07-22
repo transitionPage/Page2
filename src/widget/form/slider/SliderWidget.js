@@ -60,7 +60,6 @@ define(['../BaseFormWidget', 'text!./SliderWidget.html', 'css!./SliderWidget.css
         },
         _createSlider:function(){
             if(this.sliderObj) return;
-            this.options.$opts["value"] = this.options.value;
             if(this.options.$multi){
                 this.sliderObj = this._getInputElement().kendoRangeSlider(this.options.$opts).data("kendoRangeSlider");
             }else{
@@ -68,6 +67,9 @@ define(['../BaseFormWidget', 'text!./SliderWidget.html', 'css!./SliderWidget.css
             }
             if(!this.options.$opts.showTick){
                 this.sliderObj.wrapper.find(".k-tick").css({"background":"none"});
+            }
+            if(this.options.value){
+                this.sliderObj.value(this.options.$multi?this.options.value.split(","):this.options.value);
             }
         },
         handleDom: function(widgetDom) {

@@ -1,4 +1,4 @@
-define(['../BaseFormWidget','css!./RicheditorWidget.css'], function (BaseFormWidget) {
+define(['../BaseFormWidget','text!./RicheditorWidget.html','css!./RicheditorWidget.css'], function (BaseFormWidget,template) {
     var xtype = "richeditor";
     var RicheditorWidget = new Class({
         Extends: BaseFormWidget,
@@ -14,25 +14,13 @@ define(['../BaseFormWidget','css!./RicheditorWidget.css'], function (BaseFormWid
                 height:"100%"
             }
         },
-        editorObj:{},
+        editorObj:null,
         _afterRender:function(){
-            var that = this;
             if(!window.contextPath){
                 window.contextPath = this.options.$contextPath;
             }
-            if(that.options.$simple){
-                that.options.$opts.items = [
-                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                    'insertunorderedlist', '|', 'emoticons', 'image', 'link'];
-                //关键  同步KindEditor的值到textarea文本框   解决了多个editor的取值问题
-                that.options.$opts.afterBlur = function(){
-                    this.sync();
-                };
-            }
-            that.editorObj = KindEditor.create("#"+this.getParentElement().attr("id"),that.options.$opts);
-            if(that.options.value){
-                that.editorObj.html(that.options.value);
+            if(this.options.status != "readonly"){
+                this._createRicheditor();
             }
         },
         destroy:function(){
@@ -62,33 +50,41 @@ define(['../BaseFormWidget','css!./RicheditorWidget.css'], function (BaseFormWid
                 this.editorObj.html(htmlCon);
             }
         },
-        handleDom: function(widgetDom) {
-            if(widgetDom) {
-                widgetDom.attr("ms-class", "e-richEditor");
+        _createRicheditor:function(){
+            var that = this;
+            if(that.options.$simple){
+                that.options.$opts.items = [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link'];
+                //关键  同步KindEditor的值到textarea文本框   解决了多个editor的取值问题
+                that.options.$opts.afterBlur = function(){
+                    this.sync();
+                };
+            }
+            //"#"+this.getParentElement().attr("id")
+            that.editorObj = KindEditor.create("#tex_"+that.getId(),that.options.$opts);
+            if(that.options.value){
+                that.editorObj.html(that.options.value);
+            }
+            if(that.options.status == "disabled"){
+                that.editorObj.readonly(true);
             }
         },
-        switchStatus:function(status){
-            this.parent(status);
-            this.setAttr("value",this.getValue());
-            if (status == 'edit') {
-                this.editorObj && this.editorObj.readonly(false);
-                this.getParentElement().siblings(".ke-container").show();
-                if(this.getParentElement().siblings(".e-richEditorShowCon").length > 0){
-                    this.getParentElement().siblings(".e-richEditorShowCon").remove();
-                }
-            }else if (status == 'readonly') {
-                this.editorObj && this.editorObj.readonly(false);
-                this.getParentElement().siblings(".ke-container").hide();
-                if(this.getParentElement().siblings(".e-richEditorShowCon").length == 0){
-                    var $richEditorShowCon = jQuery("<div></div>").addClass("e-richEditorShowCon").html(this.editorObj.html());
-                    jQuery(this.getElement()).append($richEditorShowCon);
-                }
+        handleDom: function(widgetDom) {
+            if(widgetDom) {
+                widgetDom.append(template);
             }
-            else if (status == 'disabled') {
-                this.editorObj && this.editorObj.readonly(true);
-                this.getParentElement().siblings(".ke-container").show();
-                if(this.getParentElement().siblings(".e-richEditorShowCon").length > 0){
-                    this.getParentElement().siblings(".e-richEditorShowCon").remove();
+        },
+        _statusChange:function(value, oldValue, model){
+            if(value !== oldValue){
+                if((value === "edit" || value === "disabled") && !this.editorObj){
+                    this._createRicheditor();
+                }
+                if(value === "edit"){
+                    this.editorObj.readonly(false);
+                }else if(value === "disabled"){
+                    this.editorObj.readonly(true);
                 }
             }
         }

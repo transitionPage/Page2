@@ -19,9 +19,15 @@
     <div class="row">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <textarea id="switchCon"></textarea>
-                ==================sss+++++++=============================
-                <textarea id="switchCon2"></textarea>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="switchCon"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="switchCon2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -46,12 +52,12 @@
     tip1 = null;
     tip2 = null;
     require(["../../src/Bootstrap"], function () {
-        alert("hi");
         switchObj = Page.create("richeditor", {
             $parentId: 'switchCon',
             $id:"demo1",
             value:"<b>heihei</b>",
-            simple:true
+            simple:true,
+            status:"readonly"
         });
         switchObj.render();
         switchObj2 = Page.create("richeditor", {

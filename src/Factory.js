@@ -41,13 +41,13 @@ define([
     //"./widget/simple/expandGrid/ExpandGrid",
     //"./widget/customcolumns/CustomColumns",
     //"./widget/nestable/NestableWidget",
-    //"./widget/form/switch/SwitchWidget",
+    "./widget/form/switch/SwitchWidget",
     //"./widget/form/checkbox/CheckboxWidget",
     //"./widget/form/radio/RadioWidget",
     "./widget/form/textarea/TextareaWidget",
     "./widget/form/slider/SliderWidget",
     "./widget/form/richeditor/RicheditorWidget",
-    "./widget/dialog/DialogWidget",
+//    "./widget/dialog/DialogWidget",
     //"./widget/customSearcher/CustomSearcherWidget",
     "./widget/form/tooltip/TooltipWidget"
     //

@@ -4,95 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link href="/page/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/css/animate.css" rel="stylesheet">
-    <link href="/page/lib/bootstrap/css/style.css" rel="stylesheet">
-    <link href="/page/src/css/page.css" rel="stylesheet">
-
+    <link href="/page2/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/page2/lib/bootstrap/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/page2/lib/bootstrap/css/animate.css" rel="stylesheet">
+    <link href="/page2/lib/bootstrap/css/style.css" rel="stylesheet">
+    <link href="/page2/src/css/page.css" rel="stylesheet">
     <style type="text/css">
         body{
             margin:0px;
             padding:0px;
         }
-        #glideDiv0{position:fixed; bottom:0;left:0; width:100%; background:#F00;}
+        .base_content{
+            background-color: #fcfcfc;
+            margin: 0px 54px;
+        }
+        .red{
+            color: red;
+        }
+        .txt_left{
+            text-align: left !important;
+        }
     </style>
 </head>
 <body ms-skip>
 <br>
 
-<div class="container">
+<div class="base_content">
     <div class="row">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Horizontal form</h5>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <h5 class="base_s_title">个人基本信息</h5>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-4 control-label"><span class="red">*</span>学院</label>
+                    <div class="col-md-8">
+                        <div>
+                            <input class="form-control pageSelect" id="multi0"/>
+                            <!--<input class="form-control pageSelect" id="multi1"/>
+                            <input class="form-control pageSelect" id="multi2"/>
+                            <input class="form-control pageSelect" id="multi3"/>
+                            <input class="form-control pageSelect" id="multi4"/>
+                            <input class="form-control pageSelect" id="multi5"/>
+                            <input class="form-control pageSelect" id="multi6"/>
+                            <input class="form-control pageSelect" id="multi7"/>
+                            <input class="form-control pageSelect" id="multi8"/>
+                            <input class="form-control pageSelect" id="multi9"/>
+                            <input class="form-control pageSelect" id="multi10"/>
+                            <input class="form-control pageSelect" id="multi11"/>
+                            <input class="form-control pageSelect" id="multi13"/>
+                            <input class="form-control pageSelect" id="multi14"/>
+                            <input class="form-control pageSelect" id="multi15"/>
+                            <input class="form-control pageSelect" id="multi16"/>
+                            <input class="form-control pageSelect" id="multi17"/>
+                            <input class="form-control pageSelect" id="multi18"/>
+                            <input class="form-control pageSelect" id="multi19"/>
+                            <input class="form-control pageSelect" id="multi20"/>
+                            <input class="form-control pageSelect" id="multi21"/>
+                            <input class="form-control pageSelect" id="multi22"/>
+                            <input class="form-control pageSelect" id="multi23"/>
+                            <input class="form-control pageSelect" id="multi24"/>
+                            <input class="form-control pageSelect" id="multi25"/>
+                            <input class="form-control pageSelect" id="multi26"/>
+                            <input class="form-control pageSelect" id="multi27"/>
+                            <input class="form-control pageSelect" id="multi28"/>
+                            <input class="form-control pageSelect" id="multi29"/>
+                            <input class="form-control pageSelect" id="multi30"/>
+                            <input class="form-control pageSelect" id="multi31"/>
+                            <input class="form-control pageSelect" id="multi32"/>
+                            <input class="form-control pageSelect" id="multi33"/>
+                            <input class="form-control pageSelect" id="multi34"/>
+                            <input class="form-control pageSelect" id="multi35"/>
+                            <input class="form-control pageSelect" id="multi36"/>
+                            <input class="form-control pageSelect" id="multi37"/>
+                            <input class="form-control pageSelect" id="multi38"/>
+                            <input class="form-control pageSelect" id="multi39"/>
+                            <input class="form-control pageSelect" id="multi40"/>-->
 
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#">Config option 1</a>
-                        </li>
-                        <li><a href="#">Config option 2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
 
-            </div>
-            <div class="ibox-content">
-                <div class="row">
-                    <div class="col-md-6" id="multi">
-
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ibox-content" >
-                <div class="row">
-                    <div class="col-md-6" id="singleSearchable">
-
+                <div class="form-group">
+                    <label class="col-md-4 control-label"><span class="red">*</span>单选可搜索</label>
+                    <div class="col-md-8">
+                        <div>
+                            <input class="form-control pageSelect" id="singleSearch"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ibox-content" >
-                <div class="row">
-                    <div class="col-md-6" id="single">
-
+                <div class="form-group">
+                    <label class="col-md-4 control-label"><span class="red">*</span>单选不可搜索</label>
+                    <div class="col-md-8">
+                        <div>
+                            <input class="form-control pageSelect" id="single"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ibox-content" >
-                <div class="row">
-                    <div class="col-md-6" id="single">
-
+                <div class="form-group">
+                    <label class="col-md-4 control-label"><span class="red">*</span>树</label>
+                    <div class="col-md-8">
+                        <div>
+                            <input class="form-control pageSelect" id="tree"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-
     </div>
 </div>
-<script src="/page/bower_components/mootools/Source/Core/Core.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Array.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/String.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Object.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Number.js"></script>
-<script src="/page/bower_components/mootools/Source/Types/Function.js"></script>
-<script src="/page/bower_components/mootools/Source/Class/Class.js"></script>
-<script src="/page/bower_components/mootools/Source/Class/Class.Extras.js"></script>
-<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
-<script src="/page/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
 
-<script src="/page/bower_components/avalon/avalon.js"></script>
-<script src="/page/dist/page-build.js"></script>
+<script src="/page2/bower_components/mootools/Source/Core/Core.js"></script>
+<script src="/page2/bower_components/mootools/Source/Types/Array.js"></script>
+<script src="/page2/bower_components/mootools/Source/Types/String.js"></script>
+<script src="/page2/bower_components/mootools/Source/Types/Object.js"></script>
+<script src="/page2/bower_components/mootools/Source/Types/Number.js"></script>
+<script src="/page2/bower_components/mootools/Source/Types/Function.js"></script>
+<script src="/page2/bower_components/mootools/Source/Class/Class.js"></script>
+<script src="/page2/bower_components/mootools/Source/Class/Class.Extras.js"></script>
+<script src="/page2/thirdpart/products-WB0R5L90S/Static_Full_Version/js/jquery-2.1.1.js"></script>
+<script src="/page2/thirdpart/products-WB0R5L90S/Static_Full_Version/js/bootstrap.js"></script>
 <script>
-//    require(["../../src/Bootstrap"], function () {
+    $.noConflict();
+</script>
+<!--<script src="/page2/bower_components/avalon/avalon.js" data-main="/page2/dist/page-build"></script>-->
+<script src="/page2/bower_components/avalon/avalon.js" ></script>
+<!--<script src="/page2/dist/page-build.js"></script>-->
+
+<script>
+    require(["../../src/Bootstrap"], function () {
 
         var ds = Page.create("dataSet", {
             $id: 'comboBoxDS',
@@ -101,40 +139,41 @@
 //                {value:"1", display: "计算机学院qqqq"}
 //            ]
         });
-
-        var combo1 = Page.create('combobox', {
-            $parentId: 'multi',
-            $id: 'sex1',
-            label: '学院（多选）',
-            multi: true,
-            value: "1,3",
-            display: "计算机学院,经管学院",
-            $pageSize: 5,
-            dataSetId: "comboBoxDS",
+for(var i=0; i<1; i++) {
+    Page.create('combobox', {
+        $parentId: 'multi'+i,
+        $id: 'sex'+i,
+        label: '学院（多选）',
+        multi: true,
+        value: "1,3",
+        display: "计算机学院,经管学院",
+        $pageSize: 5,
+        searchable: false,
+        dataSetId: "comboBoxDS",
 //            url: "Data.demo.json",
-            showErrorMessage:true,
-            validationRules: {
-                required:true,//options中为false时，此处可重开启校验
-                length: {
-                    maxLen: 4,
-                    minLen: 2,
-                    customErrMsg:"请选择2-4个学院"
-                }
-            },
-            beforeSelectEvent: function(value, display, obj, el) {
-//                alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择前事件："+value + " " +  display);
+        showErrorMessage:true,
+        validationRules: {
+            required:true,//options中为false时，此处可重开启校验
+            length: {
+                maxLen: 4,
+                minLen: 2,
+                customErrMsg:"请选择2-4个学院"
             }
+        },
+        beforeSelectEvent: function(value, display, obj, el) {
+//                alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择前事件："+value + " " +  display);
+        }
 //            selectedEvent: function(value, display, obj, el) {
 //                alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择后事件："+value + " " +  display);
 //            }
-        })
-        combo1.render();
+    }).render();
+}
 
-        combo1._getCompVM().selectedEvent= function(value, display, obj, el) {
-//            alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择后事件："+value + " " +  display);
-        }
+//        combo1._getCompVM().selectedEvent= function(value, display, obj, el) {
+////            alert("已选中值为："+obj.getValue()+"\n已选中文本为："+obj.getDisplay()+"\n选择后事件："+value + " " +  display);
+//        }
         var combo2 = Page.create('combobox', {
-            $parentId: 'singleSearchable',
+            $parentId: 'singleSearch',
             $id: 'sex2',
             label: '学院（单选可搜索）',
             multi: false,
@@ -152,12 +191,10 @@
 
         })
         combo2.render();
-for(var i=0; i<40; i++) {
-
 
         var combo3 = Page.create('combobox', {
             $parentId: 'single',
-//            $id: 'sex3',
+            $id: 'sex3',
             label: '学院（单选）',
             multi: false,
 //            parentTpl: "inline",
@@ -172,9 +209,9 @@ for(var i=0; i<40; i++) {
             }
         })
         combo3.render();
-}
+
         var combo4 = Page.create('combobox', {
-            $parentId: 'single',
+            $parentId: 'tree',
             $id: 'sex4',
             label: '下拉树',
             multi: true,
@@ -195,9 +232,7 @@ for(var i=0; i<40; i++) {
             }
         })
         combo4.render();
-avalon.scan($(".container")[0]);
-//        Page.manager.components.sex1.focus()
-//    });
+    });
 </script>
 <!--<script src="bower_components/avalon/avalon.js" ></script>-->
 <!--<script src="dist/page-build.js" data-main="demo.js"></script>-->

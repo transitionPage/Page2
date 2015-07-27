@@ -75,8 +75,16 @@ define(['../Base'], function (Base, formTpl, inlineTpl) {
                 widgetDom = $this.getParentElement();
             }
 
-            widgetDom.wrap("<div></div>");
-            var e = widgetDom.parent();
+            var e;
+            if(widgetDom.is("div")) {
+                e = jQuery("<div></div>");
+                widgetDom.append(e);
+                widgetDom = e;
+            }
+            else if(widgetDom.is("input")) {
+                widgetDom.wrap("<div></div>");
+                e = widgetDom.parent();
+            }
             e.addClass("page_" + $this.getAttr('$xtype')).attr("ms-important", $this.getId());
 
             this.handleDom(widgetDom);

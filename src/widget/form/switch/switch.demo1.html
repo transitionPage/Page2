@@ -12,17 +12,17 @@
     <link href="/Page2/thirdpart/products-WB0R5L90S/Static_Full_Version/css/plugins/switchery/switchery.css" rel="stylesheet">
 
 </head>
-<body>
+<body ms-skip>
 <br>
 
 <div class="container">
     <div class="row">
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <div class="row">
-                    <div class="col-md-4" id="nameContainer">
-                        <div id="switchCon"/>
-                    </div>
+                <div class="row" id="row1">
+                    <!--<div class="col-md-4">
+                        <div id="switchCon"></div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -46,10 +46,15 @@
 </script>
 <script src="/Page2/bower_components/avalon/avalon.js"></script>
 <script>
-    tip1 = null;
-    tip2 = null;
-    require(["../../src/Bootstrap"], function () {
-        switchObj = Page.create("switch", {
+    for(var i=0;i<100;i++){
+        jQuery("#row1").append('<div class="col-md-4"><input type="checkbox" checked id="switchCon'+i+'" /></div>');
+        var tmp = new Switchery(jQuery("#switchCon"+i)[0],{
+            color: '#1AB394'
+        });
+    }
+//    require(["../../src/Bootstrap"], function () {
+
+        /*var switchObj = Page.create("switch", {
             $parentId: 'switchCon',
             $id:"demo",
             value:true,
@@ -57,9 +62,8 @@
             $checkValue:true,// 默认为1,
             $unCheckValue:false// 默认为0
         });
-        switchObj.render();
-
-    });
+        switchObj.render();*/
+//    });
 </script>
 <!--<script src="bower_components/avalon/avalon.js" ></script>-->
 <!--<script src="dist/page-build.js" data-main="demo.js"></script>-->
